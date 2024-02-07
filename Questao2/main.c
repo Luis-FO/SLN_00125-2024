@@ -17,7 +17,7 @@ int main() {
     free(encoded_message);
     free(decoded_message_base64);
     free(final_message);
-
+    getchar();
     return 0;
 }
 
