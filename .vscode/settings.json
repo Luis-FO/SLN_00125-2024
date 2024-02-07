@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "decode.h": "c",
+        "memory.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c"
+    }
+}
