@@ -31,7 +31,7 @@ char* readFile(const char* filename) {
  * @brief Função para decodificar uma string usando Base64
  * Ref: https://stackoverflow.com/questions/342409/how-do-i-base64-encode-decode-in-c
 */
-char* base64_decode(const char* encoded_message) {
+char* base64(const char* encoded_message) {
     const char base64_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
     int in_len = strlen(encoded_message);
@@ -39,17 +39,19 @@ char* base64_decode(const char* encoded_message) {
 
     // Verifica e ajusta o comprimento de saída se houver caracteres de preenchimento
     if (encoded_message[in_len - 1] == '=') {
-        out_len--;
+        out_len--; 
         if (encoded_message[in_len - 2] == '=') {
-            out_len--;
+            out_len--; 
         }
     }
 
-    char *decoded_message = (char*)malloc(out_len + 1);
+
+    char *decoded_message = (char*)malloc(out_len + 1); 
     int i, j = 0;
     int b[4];
 
     for (i = 0; i < in_len; i += 4) {
+        //i=4 inlen=8
         for (int k = 0; k < 4; k++) {
             // Ignora caracteres de preenchimento
             if (encoded_message[i + k] != '=') {
@@ -59,11 +61,16 @@ char* base64_decode(const char* encoded_message) {
             }
         }
 
-        decoded_message[j++] = (b[0] << 2) | (b[1] >> 4);
-        decoded_message[j++] = (b[1] << 4) | (b[2] >> 2);
-        decoded_message[j++] = (b[2] << 6) | b[3];
-    }
-
+        if (j < out_len) {
+            decoded_message[j++] = (b[0] << 2) | (b[1] >> 4);
+        }
+        if (j < out_len) {
+            decoded_message[j++] = (b[1] << 4) | (b[2] >> 2);
+        }
+        if (j < out_len) {
+            decoded_message[j++] = (b[2] << 6) | b[3];
+        }
+        
     decoded_message[j] = '\0';
 
     return decoded_message;
