@@ -31,10 +31,6 @@ char* readFile(const char* filename) {
  * @brief Função para decodificar uma string usando Base64
  * Ref: https://stackoverflow.com/questions/342409/how-do-i-base64-encode-decode-in-c
 */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 char* base64_decode(const char* encoded_message) {
     const char base64_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
